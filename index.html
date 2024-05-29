@@ -2,12 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tamagotchi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+      rel="stylesheet"
+    />
     <link href="./styles.css" rel="stylesheet" />
   </head>
   <body>
     <div class="gameBoy">
-      <p class="bar">Energy <span class="health" /></p>
+      <div class="outer">
+        <div class="inner">
+          <div class="bar">
+            <div class="bar-box">
+              <img src="./public/assets/icons/Health.svg" />
+              <span class="health">7</span>
+            </div>
+            <div class="bar-box">
+              <img src="./public/assets/icons/Hunger.svg" />
+              <span class="health">6</span>
+            </div>
+            <div class="bar-box">
+              <img src="./public/assets/icons/Fun.svg" />
+              <span class="health">6</span>
+            </div>
+            <div class="bar-box">
+              <img src="./public/assets/icons/Sleep.svg" />
+              <span class="health">6</span>
+            </div>
+          </div>
+          <div class="toy">
+            <div class="toy-img-wrapper">
+              <img src="./public/assets/tamago/Standing.svg" />
+            </div>
+          </div>
+          <p class="state">Happy</p>
+        </div>
+      </div>
+      <div class="action-container">
+        <button class="action"><img src="./public/assets/icons/Hunger.svg"/></button>
+        <button class="action"><img src="./public/assets/icons/Sleep.svg"/></button>
+        <button class="action"><img src="./public/assets/icons/Fun.svg"/></button>
+      </div>
     </div>
 
     <script src="./app.js" type="module"></script>
