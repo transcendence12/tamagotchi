@@ -130,9 +130,97 @@ button {
 }
 
 .toy-img-wrapper {
-  width: 162px;
+  width: 200px;
   border-bottom: 8px solid var(--clr-white);
 }
+
+.tamago {
+  width: 100%;
+  /* width: 200px; */
+  height: 140px;
+  background: url('./public/assets/tamago/Tamago.png') 0px 0px;
+  background-repeat: no-repeat;
+}
+/* happy, bored, sleepy, sleeping, hungry, eating, playing, dead */
+.tamago-happy, .tamago-dead, .tamago-sleepy, .tamago-sleeping, .tamago-hungry, .tamago-eating, .tamago-bored, .tamago-playing {
+  background: url('./public/assets/tamago/Tamago.png')
+}
+
+.tamago-happy {
+  background-position: -20px -15px;
+}
+
+.tamago-dead {
+  background-position: -20px -335px;
+}
+
+.tamago-sleepy {
+  background-position: -20px -491px;
+}
+
+.tamago-sleeping {
+  background-position: -20px -669px;
+}
+
+.tamago-hungry {
+  background-position: -20px -1025px;
+}
+
+.tamago-eating {
+  background-position: -20px -1204px;
+}
+
+.tamago-bored {
+  background-position: -20px -1943px;
+}
+
+.tamago-playing {
+  background-position: -20px -1766px;
+}
+/* .state-sit {
+  width: 152px;
+  height: 130px;
+}
+.state-bored {
+  width: 152px;
+  height: 130px;
+}
+.state-dead {
+  width: 182px;
+  height: 72px;
+}
+.state-eating-1 {
+  width: 152px;
+  height: 130px;
+}
+.state-eating-2 {
+  width: 152px;
+  height: 130px;
+}
+.state-hungry {
+  width: 152px;
+  height: 130px;
+}
+.state-playing-1 {
+    width: 200px;
+    height: 144px;
+}
+.state-playing-2 {
+  width: 200px;
+    height: 200px;
+}
+.state-sleeping-1 {
+  width: 152px;
+  height: 130px;
+}
+.state-sleeping-2 {
+  width: 152px;
+  height: 130px;
+}
+.state-sleepy {
+  width: 152px;
+  height: 130px;
+} */
 
 .state {
   background-color: var(--clr-lightest);
