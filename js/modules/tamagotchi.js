@@ -38,10 +38,10 @@ export default class Tamagotchi {
 
   decreaseEnergy = () => {
     if (this.energy.value > 0) {
-      this.energy.value--;
       if (this.fun.value <= 0) {
         this.energy.value--;
       }
+      this.energy.value--;
       if (this.energy.value < 0) this.energy.value = 0;
     }
   };
