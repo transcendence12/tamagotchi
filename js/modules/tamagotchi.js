@@ -31,7 +31,7 @@ export default class Tamagotchi {
 
   decreaseLifeParams = () => {
     this.decrementIntervals.energy = setInterval(this.decreaseEnergy, 2000);
-    this.decrementIntervals.hunger = setInterval(this.decreaseHealth, 1000);
+    this.decrementIntervals.hunger = setInterval(this.decreaseHunger, 1000);
     this.decrementIntervals.fun = setInterval(this.decreaseFun, 1000);
     this.decrementIntervals.health = setInterval(this.decreaseHealth, 1000);
   };
