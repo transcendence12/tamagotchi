@@ -42,7 +42,6 @@ export default class Tamagotchi {
       if (this.fun.value <= 0) {
         this.energy.value--;
       }
-      this.energy.value--;
       if (this.energy.value < 0) this.energy.value = 0;
     }
   };
