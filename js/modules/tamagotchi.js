@@ -59,6 +59,7 @@ export default class Tamagotchi {
       if (this.fun.value < 0) this.fun.value = 0;
     }
   };
+  
   decreaseHealth = () => {
     if (this.hunger.value <= 0 || this.energy.value <= 0) {
       if (this.health.value > 0) {
