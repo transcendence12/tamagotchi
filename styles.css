@@ -77,17 +77,12 @@ button {
 .bar-box {
   display: flex;
   
-  gap: 2px;
+  gap: 5px;
 }
 
-.displayValueBig {
+.health {
   /* padding: 16px; */
   font-size: var(--fs-num-big);
-  letter-spacing: -7px;
-}
-
-.displayValueSmall {
-  font-size: var(--fs-num-sm);
 }
 
 .gameBoy {
