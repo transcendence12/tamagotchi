@@ -46,14 +46,15 @@ export default class Tamagotchi {
   };
 
   checkStateChange = () => {
-    this.checkIfHappy();
-    this.checkIfSad();
-    this.checkIfHungry();
-    this.checkIfSleepy();
-    this.checkIfEating();
-    this.checkIfPlaying();
-    this.checkIfSleeping();
-    this.checkIfDead();
+    if(this.checkIfHappy()) return;
+    if (this.checkIfSad())return;
+    if(this.checkIfHungry())return;
+    if(this.checkIfSleepy())return;
+    if(this.checkIfEating())return;
+    if(this.checkIfPlaying())return;
+    if(this.checkIfSleeping())return;
+    if(this.checkIfDead())return;
+    
     this.displayStateInUI();
   };
 
