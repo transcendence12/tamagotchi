@@ -55,7 +55,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 img {
@@ -76,7 +75,7 @@ button {
 
 .bar-box {
   display: flex;
-  
+
   gap: 2px;
 }
 
@@ -110,7 +109,6 @@ button {
 
   margin-top: 40px;
   margin-bottom: 30px;
-  
 }
 
 .inner {
@@ -120,7 +118,6 @@ button {
   display: flex;
   flex-direction: column;
   padding: 15px;
-  
 }
 
 .toy {
@@ -143,19 +140,37 @@ button {
   width: 100%;
   /* width: 200px; */
   height: 140px;
-  background: url('./public/assets/tamago/Tamago.png') 0px 0px;
+  background: url("./public/assets/tamago/Tamago.png") 0px 0px;
   background-repeat: no-repeat;
 }
 /* happy, bored, sleepy, sleeping, hungry, eating, playing, dead */
-.tamago-happy, .tamago-dead, .tamago-sleepy, .tamago-sleeping, .tamago-hungry, .tamago-eating, .tamago-bored, .tamago-playing {
-  background: url('./public/assets/tamago/Tamago.png')
+.tamago-happy,
+.tamago-dead,
+.tamago-sleepy,
+.tamago-sleeping,
+.tamago-hungry,
+.tamago-eating,
+.tamago-sad,
+.tamago-playing {
+  background: url("./public/assets/tamago/Tamago.png");
 }
 
 .tamago-happy {
-  background-position: -20px -15px;
+  animation: animateHappy 0.6s steps(1) infinite;
+}
+
+@keyframes animateHappy {
+  0%,
+  100% {
+    background-position: -20px -15px;
+  }
+  50% {
+    background-position: -20 -1041px;
+  }
 }
 
 .tamago-dead {
+  height: 119px;
   background-position: -20px -335px;
 }
 
@@ -164,7 +179,17 @@ button {
 }
 
 .tamago-sleeping {
-  background-position: -20px -669px;
+  animation: animateSleeping 0.6s steps(1) infinite;
+}
+
+@keyframes animateSleeping {
+  0%,
+  100% {
+    background-position: -20px -669px;
+  }
+  50% {
+    background-position: -20px -846px;
+  }
 }
 
 .tamago-hungry {
@@ -172,21 +197,41 @@ button {
 }
 
 .tamago-eating {
-  background-position: -20px -1204px;
+  animation: animateEating 0.6s steps(1) infinite;
 }
 
-.tamago-bored {
+@keyframes animateEating {
+  0%,
+  100% {
+    background-position: -20px -1204px;
+  }
+  50% {
+    background-position: -20 -1380px;
+  }
+}
+
+.tamago-sad {
   background-position: -20px -1943px;
 }
 
 .tamago-playing {
-  background-position: -20px -1766px;
+  animation: animatePlaying 0.6s steps(1) infinite;
+}
+
+@keyframes animatePlaying {
+  0%,
+  100% {
+    background-position: -20px -1766px;
+  }
+  50% {
+    background-position: -20px -1573px;
+  }
 }
 /* .state-sit {
   width: 152px;
   height: 130px;
 }
-.state-bored {
+.state-sad {
   width: 152px;
   height: 130px;
 }
@@ -235,7 +280,6 @@ button {
   text-align: center;
 
   margin-top: 15px;
-
 }
 
 .action-container {
@@ -257,5 +301,4 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
