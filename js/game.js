@@ -37,6 +37,8 @@ export default class Game {
       this.tamagotchi.setAction("sleeping");
     } else if (clickedTargetBtn.id === "eatingBtn") {
       this.tamagotchi.setAction("eating");
+    } else if (clickedTargetBtn.id === "playingBtn") {
+      this.tamagotchi.setAction("playing");
     }
   };
 

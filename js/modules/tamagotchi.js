@@ -51,6 +51,12 @@ export default class Tamagotchi {
       } else {
         this.startEating();
       }
+    } else if (action === "playing") {
+      if (this.isInAction && this.prevState === "playing") {
+        this.stopPlaying();
+      } else {
+        this.startPlaying();
+      }
     }
   };
 
@@ -94,6 +100,34 @@ export default class Tamagotchi {
     this.setState("happy");
   };
 
+  startPlaying = () => {
+    this.isInAction = true;
+    this.prevState = "playing";
+    this.setState("playing");
+    this.incrementIntervals.fun = setInterval(() => {
+      this.fun.value += 2;
+      this.displayFun("#fun-point-element");
+      if (this.fun.value >= 10) {
+        clearInterval(this.incrementIntervals.fun);
+        this.fun.value = 10;
+      }
+    }, 1000);
+    this.decrementIntervals.energy = setInterval(() => {
+      this.energy.value -= 1;
+      this.displayEnergy("#energy-point-element");
+      if (this.energy.value <= 0) {
+        this.energy.value = 0;
+        this.stopPlaying;
+      }
+    }, 1000);
+  };
+  stopPlaying = () => {
+    this.isInAction = false;
+    clearInterval(this.incrementIntervals.fun);
+    clearInterval(this.decrementIntervals.energy);
+    this.setState("happy");
+  };
+
   displaySpriteElement = (elementSelector) => {
     const displayElement = document.querySelector(elementSelector);
     displayElement.className = `tamago tamago-${this.nextState}`;
@@ -110,7 +144,7 @@ export default class Tamagotchi {
     if (this.checkIfHungry()) return;
     if (this.checkIfSleepy()) return;
     if (this.checkIfEating()) return;
-    // if (this.checkIfPlaying()) return;
+    if (this.checkIfPlaying()) return;
     if (this.checkIfSleeping()) return;
     // if (this.checkIfDead()) return;
     if (this.nextState != this.prevState) {
@@ -161,18 +195,13 @@ export default class Tamagotchi {
     return false;
   };
 
-  // checkIfPlaying = () => {
-  //   if (
-  //     this.energy.value >= 8 &&
-  //     this.hunger.value >= 8 &&
-  //     this.fun.value >= 8 &&
-  //     this.health.value >= 8
-  //   ) {
-  //     this.setState("playing");
-  //     return true
-  //   }
-  //   return false
-  // };
+  checkIfPlaying = () => {
+    if (this.isInAction && this.prevState === "playing") {
+      this.setState("playing");
+      return true;
+    }
+    return false;
+  };
 
   checkIfSleeping = () => {
     if (this.isInAction && this.prevState === "sleeping") {
