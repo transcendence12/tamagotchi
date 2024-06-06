@@ -9,5 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     hungerElement: "#hunger-point-element",
     energyElement: "#energy-point-element",
     funElement: "#fun-point-element",
+    displayStateInUI: "#game-here",
+    actionButtonsElement: "#action-buttons-group"
   });
 });
