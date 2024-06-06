@@ -1,6 +1,8 @@
 export default class Tamagotchi {
+  isInAction = false;
+  prevState = "";
   constructor() {
-    this.state = "playing";
+    this.nextState = "happy";
 
     this.health = { value: 10, importance: 1 };
     this.hunger = { value: 10, importance: 3 };
@@ -8,6 +10,7 @@ export default class Tamagotchi {
     this.fun = { value: 10, importance: 4 };
 
     this.decrementIntervals = {};
+    this.incrementIntervals = {};
     console.log("Tamagotchi initialized");
   }
 
@@ -31,91 +34,139 @@ export default class Tamagotchi {
     displayElement.innerText = this.fun.value;
   };
 
-  setState(state){
-    this.state = state;
+  setState(nextState) {
+    this.nextState = nextState;
+    this.displayStateInUI()
+  }
+  setAction = (action) => {
+    if(action === "sleeping"){
+      if(this.isInAction && this.prevState === "sleeping"){
+        this.stopSleeping()
+      } else {
+        this.startSleeping()
+      }
+    }
   };
+
+  startSleeping = () => {
+    this.isInAction = true;
+    this.prevState = "sleeping";
+    this.setState("sleeping");
+    this.incrementIntervals.energy = setInterval(()=>{
+      this.energy.value += 2;
+      this.displayEnergy("#energy-point-element");
+      if(this.energy.value >= 10){
+        clearInterval(this.incrementIntervals.energy);
+        this.energy.value = 10;
+      }
+    }, 1000)
+  }
+
+  stopSleeping = () => {
+    this.isInAction = false;
+    clearInterval(this.incrementIntervals.energy);
+    this.setState("happy")
+  }
 
   displaySpriteElement = (elementSelector) => {
     const displayElement = document.querySelector(elementSelector);
-    displayElement.className = `tamago tamago-${this.state}`;
+    displayElement.className = `tamago tamago-${this.nextState}`;
   };
 
   displayStateDescriptionElement = (elementSelector) => {
     const displayElement = document.querySelector(elementSelector);
-    displayElement.textContent = `${this.state}`;
+    displayElement.textContent = `${this.nextState}`;
   };
 
   checkStateChange = () => {
-    if(this.checkIfHappy()) return;
-    if (this.checkIfSad())return;
-    if(this.checkIfHungry())return;
-    if(this.checkIfSleepy())return;
-    if(this.checkIfEating())return;
-    if(this.checkIfPlaying())return;
-    if(this.checkIfSleeping())return;
-    if(this.checkIfDead())return;
-    
-    this.displayStateInUI();
+    if (this.checkIfHappy()) return;
+    if (this.checkIfSad()) return;
+    if (this.checkIfHungry()) return;
+    if (this.checkIfSleepy()) return;
+    // if (this.checkIfEating()) return;
+    // if (this.checkIfPlaying()) return;
+    if (this.checkIfSleeping()) return;
+    // if (this.checkIfDead()) return;
+    if (this.nextState != this.prevState) {
+      this.displayStateInUI();
+    }
   };
 
   // check each state:
   checkIfHappy = () => {
     if (
+      !this.isInAction &&
       this.health.value >= 7 &&
       this.fun.value >= 7 &&
       this.hunger.value >= 7 &&
       this.energy.value >= 7
     ) {
       this.setState("happy");
+      return true
     }
+    return false
   };
   checkIfSad = () => {
-    if (this.fun.value <= 6) {
+    if (!this.isInAction && this.fun.value <= 6) {
       this.setState("sad");
+      return true
     }
+    return false
   };
   checkIfHungry = () => {
-    if (this.hunger.value <= 6) {
+    if (!this.isInAction && this.hunger.value <= 6) {
       this.setState("hungry");
+      return true
     }
+    return false
   };
   checkIfSleepy = () => {
-    if (this.energy.value <= 6) {
+    if (!this.isInAction && this.energy.value <= 6) {
       this.setState("sleepy");
+      return true
     }
+    return false
   };
-  checkIfEating = () => {
-    if (this.hunger.value === 5 || this.hunger.value === 4) {
-      this.setState("eating");
-    }
-  };
+  // checkIfEating = () => {
+  //   if (this.hunger.value === 5 || this.hunger.value === 4) {
+  //     this.setState("eating");
+  //     return true
+  //   }
+  //   return false
+  // };
 
-  checkIfPlaying = () => {
-    if (
-      this.energy.value >= 8 &&
-      this.hunger.value >= 8 &&
-      this.fun.value >= 8 &&
-      this.health.value >= 8
-    ) {
-      this.setState("playing");
-    }
-  };
+  // checkIfPlaying = () => {
+  //   if (
+  //     this.energy.value >= 8 &&
+  //     this.hunger.value >= 8 &&
+  //     this.fun.value >= 8 &&
+  //     this.health.value >= 8
+  //   ) {
+  //     this.setState("playing");
+  //     return true
+  //   }
+  //   return false
+  // };
 
   checkIfSleeping = () => {
-    if (this.energy.value === 4 || this.energy.value === 5) {
-      this.setState("sleeping");
+    if(this.isInAction && this.prevState === "sleeping"){
+      this.setState("sleeping")
+      return true
     }
+    return false
   };
 
-  checkIfDead = () => {
-    if (this.health.value <= 0) {
-      this.setState("dead");
-    }
-  };
+  // checkIfDead = () => {
+  //   if (this.health.value <= 0) {
+  //     this.setState("dead");
+  //     return true
+  //   }
+  //   return false
+  // };
 
   // display UI:
-  displayStateInUI() {
-    switch (this.state) {
+  displayStateInUI = () => {
+    switch (this.nextState) {
       case "happy":
       case "sad":
       case "hungry":
@@ -130,7 +181,8 @@ export default class Tamagotchi {
       default:
         break;
     }
-  }
+  };
+
 
   decreaseLifeParams = () => {
     this.decrementIntervals.energy = setInterval(

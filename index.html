@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="gameBoy">
-      <div class="outer">
+      <div class="outer" id="game-here">
         <div class="inner">
           <div class="bar">
             <div class="bar-box">
@@ -43,10 +43,10 @@
           <p class="state" id="tamagoStateDescription"></p>
         </div>
       </div>
-      <div class="action-container">
-        <button type="button" class="action"><img src="./public/assets/icons/Hunger.svg"/></button>
-        <button type="button" class="action"><img src="./public/assets/icons/Sleep.svg"/></button>
-        <button type="button" class="action"><img src="./public/assets/icons/Fun.svg"/></button>
+      <div class="action-container" id="action-buttons-group">
+        <button id="eatingBtn" type="button" class="action"><img class="action-icon-inside" src="./public/assets/icons/Hunger.svg"/></button>
+        <button id="sleepingBtn" type="button" class="action"><img class="action-icon-inside" src="./public/assets/icons/Sleep.svg"/></button>
+        <button id="playingBtn" type="button" class="action"><img class="action-icon-inside" src="./public/assets/icons/Fun.svg"/></button>
       </div>
     </div>
 

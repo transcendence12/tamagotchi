@@ -227,50 +227,6 @@ button {
     background-position: -20px -1573px;
   }
 }
-/* .state-sit {
-  width: 152px;
-  height: 130px;
-}
-.state-sad {
-  width: 152px;
-  height: 130px;
-}
-.state-dead {
-  width: 182px;
-  height: 72px;
-}
-.state-eating-1 {
-  width: 152px;
-  height: 130px;
-}
-.state-eating-2 {
-  width: 152px;
-  height: 130px;
-}
-.state-hungry {
-  width: 152px;
-  height: 130px;
-}
-.state-playing-1 {
-    width: 200px;
-    height: 144px;
-}
-.state-playing-2 {
-  width: 200px;
-    height: 200px;
-}
-.state-sleeping-1 {
-  width: 152px;
-  height: 130px;
-}
-.state-sleeping-2 {
-  width: 152px;
-  height: 130px;
-}
-.state-sleepy {
-  width: 152px;
-  height: 130px;
-} */
 
 .state {
   background-color: var(--clr-lightest);
@@ -301,4 +257,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.action-icon-inside {
+  pointer-events: none;
 }
