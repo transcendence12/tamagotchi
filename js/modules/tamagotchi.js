@@ -76,7 +76,7 @@ export default class Tamagotchi {
 
   startEating = () => {
     this.isInAction = true;
-    this.prevState === "eating";
+    this.prevState = "eating";
     this.setState("eating");
     this.incrementIntervals.hunger = setInterval(() => {
       this.hunger.value += 2;
@@ -109,7 +109,7 @@ export default class Tamagotchi {
     if (this.checkIfSad()) return;
     if (this.checkIfHungry()) return;
     if (this.checkIfSleepy()) return;
-    // if (this.checkIfEating()) return;
+    if (this.checkIfEating()) return;
     // if (this.checkIfPlaying()) return;
     if (this.checkIfSleeping()) return;
     // if (this.checkIfDead()) return;
@@ -153,13 +153,13 @@ export default class Tamagotchi {
     }
     return false;
   };
-  // checkIfEating = () => {
-  //   if (this.hunger.value === 5 || this.hunger.value === 4) {
-  //     this.setState("eating");
-  //     return true
-  //   }
-  //   return false
-  // };
+  checkIfEating = () => {
+    if (this.isInAction && this.prevState === "eating") {
+      this.setState("eating");
+      return true;
+    }
+    return false;
+  };
 
   // checkIfPlaying = () => {
   //   if (
