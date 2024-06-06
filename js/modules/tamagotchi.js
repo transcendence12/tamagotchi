@@ -36,14 +36,20 @@ export default class Tamagotchi {
 
   setState(nextState) {
     this.nextState = nextState;
-    this.displayStateInUI()
+    this.displayStateInUI();
   }
   setAction = (action) => {
-    if(action === "sleeping"){
-      if(this.isInAction && this.prevState === "sleeping"){
-        this.stopSleeping()
+    if (action === "sleeping") {
+      if (this.isInAction && this.prevState === "sleeping") {
+        this.stopSleeping();
       } else {
-        this.startSleeping()
+        this.startSleeping();
+      }
+    } else if (action === "eating") {
+      if (this.isInAction && this.prevState === "eating") {
+        this.stopEating();
+      } else {
+        this.startEating();
       }
     }
   };
@@ -52,21 +58,41 @@ export default class Tamagotchi {
     this.isInAction = true;
     this.prevState = "sleeping";
     this.setState("sleeping");
-    this.incrementIntervals.energy = setInterval(()=>{
+    this.incrementIntervals.energy = setInterval(() => {
       this.energy.value += 2;
       this.displayEnergy("#energy-point-element");
-      if(this.energy.value >= 10){
+      if (this.energy.value >= 10) {
         clearInterval(this.incrementIntervals.energy);
         this.energy.value = 10;
       }
-    }, 1000)
-  }
+    }, 1000);
+  };
 
   stopSleeping = () => {
     this.isInAction = false;
     clearInterval(this.incrementIntervals.energy);
-    this.setState("happy")
-  }
+    this.setState("happy");
+  };
+
+  startEating = () => {
+    this.isInAction = true;
+    this.prevState === "eating";
+    this.setState("eating");
+    this.incrementIntervals.hunger = setInterval(() => {
+      this.hunger.value += 2;
+      this.displayHunger("#hunger-point-element");
+      if (this.hunger.value >= 10) {
+        clearInterval(this.incrementIntervals.hunger);
+        this.hunger.value = 10;
+      }
+    }, 1000);
+  };
+
+  stopEating = () => {
+    this.isInAction = false;
+    clearInterval(this.incrementIntervals.hunger);
+    this.setState("happy");
+  };
 
   displaySpriteElement = (elementSelector) => {
     const displayElement = document.querySelector(elementSelector);
@@ -102,30 +128,30 @@ export default class Tamagotchi {
       this.energy.value >= 7
     ) {
       this.setState("happy");
-      return true
+      return true;
     }
-    return false
+    return false;
   };
   checkIfSad = () => {
     if (!this.isInAction && this.fun.value <= 6) {
       this.setState("sad");
-      return true
+      return true;
     }
-    return false
+    return false;
   };
   checkIfHungry = () => {
     if (!this.isInAction && this.hunger.value <= 6) {
       this.setState("hungry");
-      return true
+      return true;
     }
-    return false
+    return false;
   };
   checkIfSleepy = () => {
     if (!this.isInAction && this.energy.value <= 6) {
       this.setState("sleepy");
-      return true
+      return true;
     }
-    return false
+    return false;
   };
   // checkIfEating = () => {
   //   if (this.hunger.value === 5 || this.hunger.value === 4) {
@@ -149,11 +175,11 @@ export default class Tamagotchi {
   // };
 
   checkIfSleeping = () => {
-    if(this.isInAction && this.prevState === "sleeping"){
-      this.setState("sleeping")
-      return true
+    if (this.isInAction && this.prevState === "sleeping") {
+      this.setState("sleeping");
+      return true;
     }
-    return false
+    return false;
   };
 
   // checkIfDead = () => {
@@ -182,7 +208,6 @@ export default class Tamagotchi {
         break;
     }
   };
-
 
   decreaseLifeParams = () => {
     this.decrementIntervals.energy = setInterval(
