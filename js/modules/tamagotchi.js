@@ -117,7 +117,7 @@ export default class Tamagotchi {
       this.displayEnergy("#energy-point-element");
       if (this.energy.value <= 0) {
         this.energy.value = 0;
-        this.stopPlaying;
+        this.stopPlaying();
       }
     }, 1000);
   };
