@@ -21,7 +21,7 @@ export default class Game {
       funElement,
       checkStateChange,
       actionButtonsElement,
-      stateChangeCallback: this.handleTamagotchiStateChange 
+      stateChangeCallback: this.handleTamagotchiStateChange,
     });
     console.log("Game started");
 
@@ -57,16 +57,27 @@ export default class Game {
   };
 
   // Action buttons should be disabled, and replaced with Restart button
-  handleRestart = () => {
-    const restartBtnElement = document.querySelector("#restartBtn");
-    console.log(restartBtnElement);
-    const clickedTargetRestart = e.target;
-    console.log(clickedTargetRestart);
+  // handleRestart = (e) => {
+  //   const restartBtnElement = document.querySelector("#restartBtn");
+  //   console.log(restartBtnElement);
+  //   const clickedTargetRestart = e.target;
+  //   console.log(clickedTargetRestart);
 
-    // if(clickedTargetRestart.id === "restartBtn") {
+  //   if (clickedTargetRestart.id === "restartBtn") {
 
-    // }
-  };
+  //     this.tamagotchi = new Tamagotchi();
+  //     this.displayActionsUI();
+  //     this.start({
+  //       healthElement,
+  //       hungerElement,
+  //       energyElement,
+  //       funElement,
+  //       checkStateChange,
+  //       actionButtonsElement,
+  //       stateChangeCallback: this.handleTamagotchiStateChange,
+  //     });
+  //   }
+  // };
   disableActionButtons = () => {
     const actionButtons = document.querySelectorAll(".action");
     actionButtons.forEach((button) => {
