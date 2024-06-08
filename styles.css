@@ -261,3 +261,24 @@ button {
 .action-icon-inside {
   pointer-events: none;
 }
+
+.restart-button {
+  width: 292px;
+  height: 66px;
+  padding: 8px 16px 8px 16px;
+  background-color: var(--clr-bg-yellow);
+  border: 6px solid var(--clr-timber);
+  font-size: var(--fs-restart-btn);
+  color: var(--clr-dark);
+  font-family: inherit;
+
+  box-shadow: 0px 7px 0px 0px #724D50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.restart-button:hover, :focus {
+  box-shadow: none;
+}

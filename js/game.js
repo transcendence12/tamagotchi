@@ -3,7 +3,7 @@ import Tamagotchi from "./modules/tamagotchi.js";
 export default class Game {
   constructor() {
     this.tamagotchi = new Tamagotchi();
-    this.displayActionsUI;
+    this.displayActionsUI();
   }
 
   start = ({
@@ -21,8 +21,10 @@ export default class Game {
       funElement,
       checkStateChange,
       actionButtonsElement,
+      stateChangeCallback: this.handleTamagotchiStateChange,
     });
     console.log("Game started");
+
     this.displayActionsUI();
   };
 
@@ -32,6 +34,7 @@ export default class Game {
 
     const clickedTargetBtn = clickedTargetElement.closest("button");
     // console.log(clickedTargetBtn.id)
+    if (!clickedTargetBtn) return;
 
     if (clickedTargetBtn.id === "sleepingBtn") {
       this.tamagotchi.setAction("sleeping");
@@ -52,5 +55,49 @@ export default class Game {
       this.handleActions.bind(this)
     );
   };
-  // displayRestartUI = () => {}
+
+  // Action buttons should be disabled, and replaced with Restart button
+  // handleRestart = (e) => {
+  //   const restartBtnElement = document.querySelector("#restartBtn");
+  //   console.log(restartBtnElement);
+  //   const clickedTargetRestart = e.target;
+  //   console.log(clickedTargetRestart);
+
+  //   if (clickedTargetRestart.id === "restartBtn") {
+
+  //     this.tamagotchi = new Tamagotchi();
+  //     this.displayActionsUI();
+  //     this.start({
+  //       healthElement,
+  //       hungerElement,
+  //       energyElement,
+  //       funElement,
+  //       checkStateChange,
+  //       actionButtonsElement,
+  //       stateChangeCallback: this.handleTamagotchiStateChange,
+  //     });
+  //   }
+  // };
+  disableActionButtons = () => {
+    const actionButtons = document.querySelectorAll(".action");
+    actionButtons.forEach((button) => {
+      button.disabled = true;
+    });
+  };
+  displayRestartUI = () => {
+    const actionButtonsElement = document.querySelector(
+      "#action-buttons-group"
+    );
+    this.disableActionButtons();
+    actionButtonsElement.removeEventListener("click", this.handleActions);
+    actionButtonsElement.innerHTML = `<button type="button" class="restart-button" id="restartBtn">Restart</button>`;
+
+    actionButtonsElement.addEventListener("click", this.handleRestart);
+  };
+
+  handleTamagotchiStateChange = (state) => {
+    if (state === "dead") {
+      this.displayRestartUI();
+    }
+  };
 }
