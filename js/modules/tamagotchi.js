@@ -1,6 +1,7 @@
 export default class Tamagotchi {
   isInAction = false;
   prevState = "";
+  stateChangeCallback = null;
   constructor() {
     this.nextState = "happy";
 
@@ -34,10 +35,19 @@ export default class Tamagotchi {
     displayElement.innerText = this.fun.value;
   };
 
+  // setState(nextState) {
+  //   this.nextState = nextState;
+  //   this.displayStateInUI();
+  // }
+
   setState(nextState) {
     this.nextState = nextState;
+    if (this.stateChangeCallback) {
+      this.stateChangeCallback(nextState);
+    }
     this.displayStateInUI();
   }
+
   setAction = (action) => {
     if (action === "sleeping") {
       if (this.isInAction && this.prevState === "sleeping") {
@@ -146,7 +156,7 @@ export default class Tamagotchi {
     if (this.checkIfEating()) return;
     if (this.checkIfPlaying()) return;
     if (this.checkIfSleeping()) return;
-    // if (this.checkIfDead()) return;
+    if (this.checkIfDead()) return;
     if (this.nextState != this.prevState) {
       this.displayStateInUI();
     }
@@ -167,21 +177,21 @@ export default class Tamagotchi {
     return false;
   };
   checkIfSad = () => {
-    if (!this.isInAction && this.fun.value <= 6) {
+    if (!this.isInAction && this.fun.value <= 6 && this.health.value > 0) {
       this.setState("sad");
       return true;
     }
     return false;
   };
   checkIfHungry = () => {
-    if (!this.isInAction && this.hunger.value <= 6) {
+    if (!this.isInAction && this.hunger.value <= 6 && this.health.value > 0) {
       this.setState("hungry");
       return true;
     }
     return false;
   };
   checkIfSleepy = () => {
-    if (!this.isInAction && this.energy.value <= 6) {
+    if (!this.isInAction && this.energy.value <= 6 && this.health.value > 0) {
       this.setState("sleepy");
       return true;
     }
@@ -211,13 +221,13 @@ export default class Tamagotchi {
     return false;
   };
 
-  // checkIfDead = () => {
-  //   if (this.health.value <= 0) {
-  //     this.setState("dead");
-  //     return true
-  //   }
-  //   return false
-  // };
+  checkIfDead = () => {
+    if (this.health.value <= 0) {
+      this.setState("dead");
+      return true;
+    }
+    return false;
+  };
 
   // display UI:
   displayStateInUI = () => {
@@ -312,12 +322,13 @@ export default class Tamagotchi {
     }
   };
 
-  mount = ({ healthElement, hungerElement, energyElement, funElement }) => {
+  mount = ({ healthElement, hungerElement, energyElement, funElement, stateChangeCallback }) => {
     this.displayHealth(healthElement);
     this.displayHunger(hungerElement);
     this.displayEnergy(energyElement);
     this.displayFun(funElement);
     this.decreaseLifeParams();
     this.checkStateChange();
+    this.stateChangeCallback = stateChangeCallback;
   };
 }
