@@ -74,7 +74,7 @@ export default class Game {
       this.handleActions.bind(this)
     );
   };
-
+  // restart handler:
   handleRestart = (e) => {
     const restartBtnElement = document.querySelector("#restartBtn");
     console.log(restartBtnElement);
