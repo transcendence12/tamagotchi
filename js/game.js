@@ -101,16 +101,16 @@ export default class Game {
         // checkStateChange: this.checkStateChange,
         actionButtonsElement: this.actionButtonsElement,
       });
-      // this.handleTamagotchiStateChange();
-      // this.tamagotchi.mount({
-      //   healthElement: this.healthElement,
-      //   hungerElement: this.hungerElement,
-      //   energyElement: this.energyElement,
-      //   funElement: this.funElement,
-      //   displayStateInUIelement: this.displayStateInUIelement,
-      //   // checkStateChange: this.checkStateChange,
-      //   stateChangeCallback: this.handleTamagotchiStateChange,
-      // });
+      this.handleTamagotchiStateChange();
+      this.tamagotchi.mount({
+        healthElement: this.healthElement,
+        hungerElement: this.hungerElement,
+        energyElement: this.energyElement,
+        funElement: this.funElement,
+        displayStateInUIelement: this.displayStateInUIelement,
+        // checkStateChange: this.checkStateChange,
+        stateChangeCallback: this.handleTamagotchiStateChange,
+      });
     }
   };
 
