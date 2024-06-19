@@ -74,13 +74,12 @@ export default class Game {
       this.handleActions.bind(this)
     );
   };
-
+  // restart handler:
   handleRestart = (e) => {
     const restartBtnElement = document.querySelector("#restartBtn");
-    console.log(restartBtnElement);
+    // console.log(restartBtnElement);
     const clickedTargetRestart = e.target;
-    console.log(clickedTargetRestart);
-
+    // console.log(clickedTargetRestart);
     if (clickedTargetRestart.id === "restartBtn") {
       this.tamagotchi = new Tamagotchi();
       const actionButtonsElement = document.querySelector(
@@ -92,6 +91,7 @@ export default class Game {
       );
 
       this.displayActionsUI();
+      
       this.start({
         healthElement: this.healthElement,
         hungerElement: this.hungerElement,
@@ -101,16 +101,16 @@ export default class Game {
         // checkStateChange: this.checkStateChange,
         actionButtonsElement: this.actionButtonsElement,
       });
-      // this.handleTamagotchiStateChange();
-      // this.tamagotchi.mount({
-      //   healthElement: this.healthElement,
-      //   hungerElement: this.hungerElement,
-      //   energyElement: this.energyElement,
-      //   funElement: this.funElement,
-      //   displayStateInUIelement: this.displayStateInUIelement,
-      //   // checkStateChange: this.checkStateChange,
-      //   stateChangeCallback: this.handleTamagotchiStateChange,
-      // });
+      this.handleTamagotchiStateChange();
+      this.tamagotchi.mount({
+        healthElement: this.healthElement,
+        hungerElement: this.hungerElement,
+        energyElement: this.energyElement,
+        funElement: this.funElement,
+        displayStateInUIelement: this.displayStateInUIelement,
+        // checkStateChange: this.checkStateChange,
+        stateChangeCallback: this.handleTamagotchiStateChange,
+      });
     }
   };
 
