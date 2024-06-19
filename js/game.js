@@ -77,10 +77,9 @@ export default class Game {
   // restart handler:
   handleRestart = (e) => {
     const restartBtnElement = document.querySelector("#restartBtn");
-    console.log(restartBtnElement);
+    // console.log(restartBtnElement);
     const clickedTargetRestart = e.target;
-    console.log(clickedTargetRestart);
-
+    // console.log(clickedTargetRestart);
     if (clickedTargetRestart.id === "restartBtn") {
       this.tamagotchi = new Tamagotchi();
       const actionButtonsElement = document.querySelector(
@@ -92,6 +91,7 @@ export default class Game {
       );
 
       this.displayActionsUI();
+      
       this.start({
         healthElement: this.healthElement,
         hungerElement: this.hungerElement,
