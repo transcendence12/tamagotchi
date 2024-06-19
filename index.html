@@ -12,6 +12,7 @@
     />
     <link href="./styles.css" rel="stylesheet" />
   </head>
+
   <body>
     <div class="gameBoy">
       <div class="outer" id="game-here">
@@ -21,25 +22,28 @@
               <img src="./public/assets/icons/Health.svg" />
               <span
                 id="health-point-element"
-                class="health displayValueBig"
+                class="point health displayValueBig"
               ></span>
             </div>
             <div class="bar-box">
               <img src="./public/assets/icons/Hunger.svg" />
               <span
                 id="hunger-point-element"
-                class="hunger displayValueBig"
+                class="point hunger displayValueBig"
               ></span>
-            </div>
-            <div class="bar-box">
-              <img src="./public/assets/icons/Fun.svg" />
-              <span id="fun-point-element" class="fun displayValueBig"></span>
             </div>
             <div class="bar-box">
               <img src="./public/assets/icons/Sleep.svg" />
               <span
                 id="energy-point-element"
-                class="energy displayValueBig"
+                class="point energy displayValueBig"
+              ></span>
+            </div>
+            <div class="bar-box">
+              <img src="./public/assets/icons/Fun.svg" />
+              <span
+                id="fun-point-element"
+                class="point fun displayValueBig"
               ></span>
             </div>
           </div>
@@ -52,23 +56,7 @@
           <p class="state" id="tamagoStateDescription"></p>
         </div>
       </div>
-      <div class="action-container" id="action-buttons-group">
-        <button id="eatingBtn" type="button" class="action">
-          <img
-            class="action-icon-inside"
-            src="./public/assets/icons/Hunger.svg"
-          />
-        </button>
-        <button id="sleepingBtn" type="button" class="action">
-          <img
-            class="action-icon-inside"
-            src="./public/assets/icons/Sleep.svg"
-          />
-        </button>
-        <button id="playingBtn" type="button" class="action">
-          <img class="action-icon-inside" src="./public/assets/icons/Fun.svg" />
-        </button>
-      </div>
+      <div class="action-container" id="action-buttons-group"></div>
     </div>
 
     <script src="./app.js" type="module"></script>

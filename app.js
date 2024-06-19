@@ -1,6 +1,7 @@
 import Game from "./js/game.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const game = new Game();
 
   // Start game
@@ -9,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
     hungerElement: "#hunger-point-element",
     energyElement: "#energy-point-element",
     funElement: "#fun-point-element",
-    displayStateInUI: "#game-here",
-    actionButtonsElement: "#action-buttons-group"
+    // displayStateInUIelement: ".gameBoy",
+    actionButtonsElement: "#action-buttons-group",
+    // checkStateChange: game.handleTamagotchiStateChange,
+
   });
 });
