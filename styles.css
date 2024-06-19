@@ -50,6 +50,7 @@ body {
   font-weight: 400;
   font-style: normal;
 
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -67,16 +68,32 @@ button {
 }
 
 .bar {
-  color: var(--clr-dark);
+  color: var(--clr-plum);
 
   display: flex;
   justify-content: space-between;
+
+  padding-bottom: 10px;
+
+  width: 330px;
 }
 
 .bar-box {
   display: flex;
 
   gap: 2px;
+
+  width: 65px;
+  height: 60px;
+}
+
+.point {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: var(--fs-num-sm);
+  color: var(--clr-plum);
 }
 
 .displayValueBig {
@@ -156,7 +173,7 @@ button {
 }
 
 .tamago-happy {
-  animation: animateHappy 0.6s steps(1) infinite;
+  animation: animateHappy 0.6s steps(1) infinite 200ms;
 }
 
 @keyframes animateHappy {
@@ -165,14 +182,11 @@ button {
     background-position: -20px -15px;
   }
   50% {
-    background-position: -20 -1041px;
+    background-position: -20px -200px;
   }
 }
 
-.tamago-dead {
-  height: 119px;
-  background-position: -20px -335px;
-}
+
 
 .tamago-sleepy {
   background-position: -20px -491px;
@@ -206,7 +220,7 @@ button {
     background-position: -20px -1204px;
   }
   50% {
-    background-position: -20 -1380px;
+    background-position: -20 -1385px;
   }
 }
 
@@ -228,9 +242,15 @@ button {
   }
 }
 
+.tamago-dead {
+  height: 119px;
+  background-position: -20px -335px;
+}
+
 .state {
   background-color: var(--clr-lightest);
   font-size: var(--fs-state-btn);
+  color: var(--clr-plum);
   text-transform: uppercase;
 
   text-align: center;
