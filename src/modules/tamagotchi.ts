@@ -1,5 +1,38 @@
-export default class Tamagotchi {
-  stateChangeCallback = null;
+export interface ITamagotchi {
+  funElement: string;
+  energyElement: string;
+  hungerElement: string;
+  healthElement: string;
+  stateChangeCallback: ((state: TamagotchiState) => void) | null;
+}
+
+export type TamagotchiState =
+  | "happy"
+  | "sad"
+  | "hungry"
+  | "sleepy"
+  | "eating"
+  | "playing"
+  | "sleeping"
+  | "dead";
+
+export default class Tamagotchi implements ITamagotchi {
+  funElement!: string;
+  energyElement!: string;
+  hungerElement!: string;
+  healthElement!: string;
+  stateChangeCallback: ((state: TamagotchiState) => void) | null = null;
+
+  state: TamagotchiState;
+  action: TamagotchiState | null;
+
+  health: { value: number; importance: number };
+  hunger: { value: number; importance: number };
+  energy: { value: number; importance: number };
+  fun: { value: number; importance: number };
+
+  number: number;
+  parametersDecreaseInterval: NodeJS.Timeout;
 
   constructor() {
     this.state = "happy";
@@ -88,38 +121,57 @@ export default class Tamagotchi {
       energy: this.energy.value,
       fun: this.fun.value,
     });
-
-    // this.displayHealth("#health-point-element");
-    // this.displayHunger("#hunger-point-element");
-    // this.displayEnergy("#energy-point-element");
-    // this.displayFun("#fun-point-element");
   };
 
-  displayHealth = (elementSelector) => {
-    const displayElement = document.querySelector(elementSelector);
-    displayElement.innerText = this.health.value;
-    this.updateDisplayClass(displayElement, this.health.value);
+  displayHealth = (elementSelector: string) => {
+    const displayElement = document.querySelector(
+      elementSelector
+    ) as HTMLSpanElement;
+    if (displayElement) {
+      displayElement.innerText = this.health.value + "";
+      this.updateDisplayClass(displayElement, this.health.value);
+    } else {
+      console.error(`Element not found: ${elementSelector}`);
+    }
   };
 
-  displayHunger = (elementSelector) => {
-    const displayElement = document.querySelector(elementSelector);
-    displayElement.innerText = this.hunger.value;
-    this.updateDisplayClass(displayElement, this.hunger.value);
+  displayHunger = (elementSelector: string) => {
+    const displayElement = document.querySelector(
+      elementSelector
+    ) as HTMLSpanElement;
+    if (displayElement) {
+      displayElement.innerText = this.hunger.value + "";
+      this.updateDisplayClass(displayElement, this.hunger.value);
+    } else {
+      console.error(`Element not found: ${elementSelector}`);
+    }
   };
 
-  displayEnergy = (elementSelector) => {
-    const displayElement = document.querySelector(elementSelector);
-    displayElement.innerText = this.energy.value;
-    this.updateDisplayClass(displayElement, this.energy.value);
+  displayEnergy = (elementSelector: string) => {
+    const displayElement = document.querySelector(
+      elementSelector
+    ) as HTMLSpanElement;
+    if (displayElement) {
+      displayElement.innerText = this.energy.value + "";
+      this.updateDisplayClass(displayElement, this.energy.value);
+    } else {
+      console.error(`Element not found: ${elementSelector}`);
+    }
   };
 
-  displayFun = (elementSelector) => {
-    const displayElement = document.querySelector(elementSelector);
-    displayElement.innerText = this.fun.value;
-    this.updateDisplayClass(displayElement, this.fun.value);
+  displayFun = (elementSelector: string) => {
+    const displayElement = document.querySelector(
+      elementSelector
+    ) as HTMLSpanElement;
+    if (displayElement) {
+      displayElement.innerText = this.fun.value + "";
+      this.updateDisplayClass(displayElement, this.fun.value);
+    } else {
+      console.error(`Element not found: ${elementSelector}`);
+    }
   };
 
-  updateDisplayClass(displayElement, value) {
+  updateDisplayClass(displayElement: HTMLElement, value: number) {
     if (value === 10) {
       displayElement.classList.add("displayValueSmall");
     } else {
@@ -139,7 +191,7 @@ export default class Tamagotchi {
   //   }
   // };
 
-  setState(state) {
+  setState(state: TamagotchiState) {
     if (this.state === "dead") return;
 
     console.log(`Changing state from ${this.state} to ${state}`);
@@ -164,7 +216,7 @@ export default class Tamagotchi {
     this.displayStateInUI();
   }
 
-  setAction = (action) => {
+  setAction = (action: TamagotchiState) => {
     if (this.state === "dead") return;
 
     console.log(`setAction called with action: ${action}`);
@@ -178,28 +230,9 @@ export default class Tamagotchi {
     }
 
     console.log(`Action set: ${this.action}, Current state: ${this.state}`);
-    // this.increaseLifeParams()
   };
 
-  // setAction = (action) => {
-  //   if (this.state === "dead") return;
-
-  //   console.log(`setAction called with action: ${action}`);
-  //   this.action = action;
-
-  //   if (action === "sleeping" && this.state !== "sleeping") {
-  //     this.setState("sleeping");
-  //   } else if (action === "eating" && this.state !== "eating") {
-  //     this.setState("eating");
-  //   } else if (action === "playing" && this.state !== "playing") {
-  //     this.setState("playing");
-  //   }
-
-  //   console.log(`Action set: ${this.action}, Current state: ${this.state}`);
-  //   this.increaseLifeParams();
-  // };
-
-  displaySpriteElement = (elementSelector) => {
+  displaySpriteElement = (elementSelector: string) => {
     const displayElement = document.querySelector(elementSelector);
     if (displayElement) {
       displayElement.className = `tamago tamago-${this.state}`;
@@ -209,8 +242,10 @@ export default class Tamagotchi {
     }
   };
 
-  displayStateDescriptionElement = (elementSelector) => {
-    const displayElement = document.querySelector(elementSelector);
+  displayStateDescriptionElement = (elementSelector: string) => {
+    const displayElement = document.querySelector(
+      elementSelector
+    ) as HTMLParagraphElement;
     displayElement.textContent = `${this.state}`;
   };
 
@@ -301,7 +336,7 @@ export default class Tamagotchi {
     console.log("Stopped main interval");
   };
 
-  onStateChange(callback) {
+  onStateChange(callback: (state: TamagotchiState) => void) {
     this.stateChangeCallback = callback;
   }
 
@@ -310,15 +345,12 @@ export default class Tamagotchi {
     hungerElement,
     energyElement,
     funElement,
-    displayStateInUIelement,
     stateChangeCallback,
-  }) => {
+  }: ITamagotchi) => {
     this.displayHealth(healthElement);
     this.displayHunger(hungerElement);
     this.displayEnergy(energyElement);
     this.displayFun(funElement);
-    this.displayStateInUI(displayStateInUIelement);
     this.stateChangeCallback = stateChangeCallback;
-    // this.onStateChange(stateChangeCallback);
   };
 }
