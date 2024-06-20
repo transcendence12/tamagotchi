@@ -10,9 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     hungerElement: "#hunger-point-element",
     energyElement: "#energy-point-element",
     funElement: "#fun-point-element",
+    stateChangeCallback: game.handleTamagotchiStateChange.bind(game),
     // displayStateInUIelement: ".gameBoy",
     actionButtonsElement: "#action-buttons-group",
-    // checkStateChange: game.handleTamagotchiStateChange,
-
   });
 });
