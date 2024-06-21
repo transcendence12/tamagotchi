@@ -3,6 +3,7 @@
 </h1>
 
 This project is about recreating famous game.
+https://transcendence12.github.io/tamagotchi/
 
 ---
 
