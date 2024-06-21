@@ -169,7 +169,8 @@ button {
 .tamago-eating,
 .tamago-sad,
 .tamago-playing {
-  background: url("./public/assets/tamago/Tamago.png");
+  /* background: url("./public/assets/tamago/Tamago.png"); */
+  background: url("./tamago/Tamago.png");
 }
 
 .tamago-happy {
